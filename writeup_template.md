@@ -12,12 +12,10 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./output_images/Ex_car_notcar.png
 [image2]: ./output_images/Ex_Car_hog.png
-[image2]: ./output_images/Ex_NotCar_hog.png
+[image3]: ./output_images/Ex_NotCar_hog.png
 [image4]: ./output_images/Sliding_window.png
 [image5]: ./output_images/heatmap.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+[video1]: ./test_videos/output/project_video.mp4
 
 ###Histogram of Oriented Gradients (HOG)
 
@@ -49,7 +47,6 @@ A linear SVM is used to train the images by extracting features (code cell 9).To
 
 The 'find_cars' only has to extract hog features once and then can be sub-sampled to get all of its overlaying windows. Each window is defined by a scaling factor of 1.5.I havent experimented with different scales as the initial value gave good result.
 
-![alt text][image3]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
@@ -70,7 +67,7 @@ To remove false positives, I created a heatmap and then thresholded that map to 
 
 Here's an example result showing the heatmap for test images, the result of `scipy.ndimage.measurements.label()` and the bounding boxes:
 
-### Here are six frames and their corresponding heatmaps:
+### Heatmap for a test image:
 
 ![alt text][image5]
 
