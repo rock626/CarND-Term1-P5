@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 [image5]: ./output_images/heatmap.png
 [video1]: ./test_videos/output/project_video.mp4
 
-###Histogram of Oriented Gradients (HOG)
+## Histogram of Oriented Gradients (HOG)
 
 The code for this step is contained in defined in `get_hog_features` (2nd code cell of the IPython notebook ).Also combining with color and spatial features, its defined in method `extract_features` (7th code cell).
 
@@ -33,22 +33,22 @@ Here is a Car and Not Car example using the Gray image and HOG parameters of `or
 ![alt text][image2]
 ![alt text][image3]
 
-####2.HOG parameters.
+## 2.HOG parameters.
 
 Initially i tried using RGB colorspace and spatial size of (16,16) and other parameters `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` , from classroom.Using these didnt actually detect white cars from test images.So i tried different combinations like HSL and other colorspaces, but ended with `YCrCb`.
 
-####3. Classifier with HOG parameters.
+## 3. Classifier with HOG parameters.
 
 A linear SVM is used to train the images by extracting features (code cell 9).To extract features, hog parameters are used along with spatial bins and color classificaiton.Even though , accuracy was above 99% for RGB, it failed to detect all types of car objects especially white cars.So different combinations of colorspace are experimented such that car objects are detected from test set.
 
-###Sliding Window Search
+## Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+## 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 The 'find_cars' only has to extract hog features once and then can be sub-sampled to get all of its overlaying windows. Each window is defined by a scaling factor of 1.5.I havent experimented with different scales as the initial value gave good result.
 
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+## 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on one scale (1.5) using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
@@ -57,11 +57,11 @@ Ultimately I searched on one scale (1.5) using YCrCb 3-channel HOG features plus
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+## 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./test_videos_output/project_video.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+## 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 To remove false positives, I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
@@ -73,9 +73,9 @@ Here's an example result showing the heatmap for test images, the result of `sci
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 I mostly used the code from the classroom and initially there were issues in combining feature vector of spatial and hog features.With the help of forum and debugging ,i was able to resolve those.The classroom code gave more than 99% accuracy but failed at detecting white cars and there were too many false positives.Then i played around colorspaces and spatial bins.Though changing spatial bins didnt help much but YCrCb colorspace was better.And also i used all channels to extract hog features instead of one channel.
 
